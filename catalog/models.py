@@ -20,6 +20,7 @@ class Product(models.Model):
     description = models.TextField(null=True)
     image = models.ImageField(upload_to='images/', verbose_name='картинки')
     category = models.CharField(max_length=150, verbose_name='Категория')
+    group = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='products')
     price = models.IntegerField()
     created_at = models.DateField(auto_now_add=True)
     updated_at = models.DateField(auto_now_add=True)
