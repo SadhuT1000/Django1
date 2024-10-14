@@ -1,0 +1,39 @@
+[
+{
+    "model": "catalog.category",
+    "pk": 1,
+    "fields": {
+        "name": "test",
+        "description": "testtetstes"
+    }
+},
+{
+    "model": "catalog.category",
+    "pk": 2,
+    "fields": {
+        "name": "Техника",
+        "description": "описание техники"
+    }
+},
+{
+    "model": "catalog.category",
+    "pk": 3,
+    "fields": {
+        "name": "Еда",
+        "description": "описание еды"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 2,
+    "fields": {
+        "names": "арбуз",
+        "description": "Большой арбуз 10 кг",
+        "image": "",
+        "category": "Еда",
+        "price": 1000,
+        "created_at": "2024-10-13",
+        "updated_at": "2024-10-13"
+    }
+}
+]
