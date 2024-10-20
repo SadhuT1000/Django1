@@ -1,7 +1,7 @@
-from django.shortcuts import render
+
 from catalog.models import Product, Category
 # Create your views here.
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 
 
@@ -14,7 +14,7 @@ def contacts(request):
 
 
 def info(request, product_id):
-    product = Product.objects.get(id=product_id)
+    product = get_object_or_404(Product, id=product_id)
 
     context = {
        'product': product
