@@ -1,0 +1,15 @@
+{% extends 'catalog/base.html' %}
+
+{% block title %}Список продуктов{% endblock %}
+{% load my_tags %}
+
+{% block content %}
+{% include 'catalog/header.html' %}
+<h2>Подробнее по продукту</h2>
+<p>Название: {{ product.names |upper }} </p>
+<p>Описание: {{ product.description|truncatechars:100 }}</p>
+<p>Категория: {{ product.category }}</p>
+<p>Цена: {{ product.price }}</p>
+<p>Фото: <img src="{{ product.image | media_filter }}" width=" 400" height=" 270">
+</p>
+{% endblock %}

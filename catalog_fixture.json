@@ -1,0 +1,104 @@
+[
+{
+    "model": "catalog.category",
+    "pk": 1,
+    "fields": {
+        "name": "test",
+        "description": "testtetstes"
+    }
+},
+{
+    "model": "catalog.category",
+    "pk": 2,
+    "fields": {
+        "name": "Техника",
+        "description": "описание техники"
+    }
+},
+{
+    "model": "catalog.category",
+    "pk": 3,
+    "fields": {
+        "name": "Еда",
+        "description": "описание еды"
+    }
+},
+{
+    "model": "catalog.category",
+    "pk": 4,
+    "fields": {
+        "name": "Одежда",
+        "description": "описание и параметры одежды"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 2,
+    "fields": {
+        "names": "арбуз",
+        "description": "Большой арбуз 10 кг",
+        "image": "",
+        "category": "Еда",
+        "group": 1,
+        "price": 1000,
+        "created_at": "2024-10-13",
+        "updated_at": "2024-10-13"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 3,
+    "fields": {
+        "names": "Игровая приставка",
+        "description": "SteamDeck 256gb",
+        "image": "",
+        "category": "Техника",
+        "group": 1,
+        "price": 60000,
+        "created_at": "2024-10-13",
+        "updated_at": "2024-10-13"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 4,
+    "fields": {
+        "names": "Планшет",
+        "description": "ipad mini 64gb",
+        "image": "",
+        "category": "Техника",
+        "group": 1,
+        "price": 40000,
+        "created_at": "2024-10-13",
+        "updated_at": "2024-10-13"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 7,
+    "fields": {
+        "names": "Джинсы",
+        "description": "Синие свободные джинсы",
+        "image": "",
+        "category": "Одежда",
+        "group": 4,
+        "price": 4500,
+        "created_at": "2024-10-18",
+        "updated_at": "2024-10-18"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 8,
+    "fields": {
+        "names": "груша",
+        "description": "лиловая спелая садовая",
+        "image": "",
+        "category": "Еда",
+        "group": 3,
+        "price": 350,
+        "created_at": "2024-10-18",
+        "updated_at": "2024-10-18"
+    }
+}
+]
