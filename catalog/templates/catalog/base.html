@@ -29,14 +29,11 @@
     </nav>
 
 <header>
-    {% include 'catalog/includes/inc_menu.html'%}
+    {% include 'includes/inc_menu.html'%}
 </header>
 
     <div class="container mt-5">
-        <p>
-                    <a class="btn btn-primary" href="{% url 'catalog:product_create' %}" role="button">Новый продукт</a>
 
-                </p>
    {% block content %}{% endblock %}
     </div>
     <script src="/static/js/bootstrap.bundle.min.js"></script>

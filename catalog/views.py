@@ -1,4 +1,4 @@
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, TemplateView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from catalog.models import Product, Category
 from django.urls import reverse_lazy, reverse
@@ -33,38 +33,12 @@ class ProductDeleteView(DeleteView):
     model = Product
     success_url = reverse_lazy('catalog:products_list')
 
+class ContactView(TemplateView):
+    template_name = 'catalog/contacts.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['additional_data'] = 'Это дополнительная информация'
+        return context
 
 
-#
-# from catalog.models import Product, Category
-# # Create your views here.
-# from django.shortcuts import render, get_object_or_404
-# from django.http import HttpResponse
-#
-#
-# def home(request):
-#     return render(request, 'catalog/home.html')
-#
-#
-# def contacts(request):
-#     return render(request, 'catalog/contacts.html')
-#
-#
-# def info(request, product_id):
-#     product = get_object_or_404(Product, id=product_id)
-#
-#     context = {
-#        'product': product
-#     }
-#     return render(request, template_name='catalog/info.html', context=context)
-#
-#
-# def all_products(request):
-#
-#     products = Product.objects.all()
-#
-#     context = {
-#         'products': products,
-#     }
-#
-#     return render(request, template_name='catalog/all_products.html', context=context)
