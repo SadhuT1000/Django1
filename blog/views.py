@@ -8,7 +8,7 @@ class BlogPostListView(ListView):
     model = BlogPost
 
     def get_queryset(self):
-        return BlogPost.objects.filter(is_published=True)
+        return BlogPost.objects.filter(is_published=False)
 
 class BlogPostCreateView(CreateView):
     model = BlogPost

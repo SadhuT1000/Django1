@@ -4,23 +4,23 @@
 <div class="album py-5 bg-body-tertiary">
     <div class="container">
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-            {% for product in blog_blogpost %}
+           {% for post in object_list %}
             <div class="col">
                 <div class="card shadow-sm">
-                    <img src="{{ product.image | media_filter }}">
+                    <img src="{{ post.image | media_filter }}">
                     <div class="card-body">
-                        <p class="card-text">{{ product.description|truncatechars:100 }}</p>
+                        <p class="card-text">{{ post.description|truncatechars:100 }}</p>
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="btn-group">
-                                <a class="btn btn-primary mr-3" href="{% url 'blog:blog_detail' product.pk %}"
+                                <a class="btn btn-primary mr-3" href="{% url 'blog:blog_detail' post.pk %}"
                                    role="button">Посмотреть</a>
-                                <a class="btn btn-primary ms-3" href="{% url 'blog:blog_create' product.pk %}"
+                                <a class="btn btn-primary ms-3" href="{% url 'blog:blog_update' post.pk %}"
                                    role="button">Редакт</a>
-                                <a class="btn btn-danger ms-3 " href="{% url 'blog:blog_delete' product.pk %}"
+                                <a class="btn btn-danger ms-3 " href="{% url 'blog:blog_delete' post.pk %}"
                                    role="button">Удалить</a>
                             </div>
                         </div>
-                        <p class="card-text mt-2">Просмотров: {{ product.views_counter}}</p>
+                        <p class="card-text mt-2">Просмотров: {{ post.views_counter}}</p>
                     </div>
                 </div>
             </div>
