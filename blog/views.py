@@ -12,7 +12,7 @@ class BlogPostListView(ListView):
 
 class BlogPostCreateView(CreateView):
     model = BlogPost
-    fields = ('title', 'description')
+    fields = ('title', 'description', 'slug')
     success_url = reverse_lazy('blog:blog_list')
 
 class BlogPostDetailView(DetailView):
