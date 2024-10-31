@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, DetailView, TemplateView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from blog.models import BlogPost
@@ -14,6 +14,13 @@ class BlogPostCreateView(CreateView):
     model = BlogPost
     fields = ('title', 'description', 'slug')
     success_url = reverse_lazy('blog:blog_list')
+
+    def get_object(self, queryset=None):
+        slug = self.kwargs.get(self.slug_url_kwarg)
+        queryset = queryset or self.get_queryset()
+        return get_object_or_404(queryset, **{self.slug_field: slug})
+
+
 
 class BlogPostDetailView(DetailView):
     model = BlogPost
