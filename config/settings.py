@@ -1,6 +1,8 @@
 import os
 from dotenv import load_dotenv
 from pathlib import Path
+from django.conf.global_settings import STATICFILES_DIRS, LOGIN_REDIRECT_URL, LOGIN_URL, LOGOUT_REDIRECT_URL
+
 load_dotenv(override=True)
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -133,16 +135,17 @@ AUTH_USER_MODEL = 'users.User'
 
 
 
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
+EMAIL_HOST_USER = 'bolomozhnov@gmail.com'
+EMAIL_HOST_PASSWORD = os.getenv('SMTP_PASSWORD')
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
 LOGIN_REDIRECT_URL = '/catalog/products'
 LOGOUT_REDIRECT_URL = '/catalog/products'
-
-
-EMAIL_HOST = 'smtp.yandex.ru'
-EMAIL_PORT = 465
-EMAIL_USE_TLS = False
-EMAIL_USE_SSL = True
-EMAIL_HOST_USER = os.getenv('SMTP_USERNAME')
-EMAIL_HOST_PASSWORD = os.getenv('SMTP_PASSWORD')
-
-SERVER_EMAIL = EMAIL_HOST_USER
-DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+LOGIN_URL = 'users:login'
