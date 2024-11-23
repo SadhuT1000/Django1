@@ -7,8 +7,10 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import PermissionDenied
 from django.http import HttpResponseForbidden
 
+
 class ProductListView(ListView):
     model = Product
+
 
 class ProductCreateView(LoginRequiredMixin, CreateView):
     model = Product
@@ -23,17 +25,18 @@ class ProductCreateView(LoginRequiredMixin, CreateView):
         product.save()
         return super().form_valid(form)
 
+
 class ProductDetailView(LoginRequiredMixin, DetailView):
     model = Product
 
     def get_object(self, queryset=None):
-
         self.object = super().get_object(queryset)
         if self.request.user == self.object.owner:
             self.object.views_counter += 1
             self.object.save()
             return self.object
         raise PermissionDenied
+
 
 class ProductUpdateView(LoginRequiredMixin, UpdateView):
     model = Product
@@ -44,7 +47,6 @@ class ProductUpdateView(LoginRequiredMixin, UpdateView):
     def get_success_url(self):
         return reverse('catalog:products_detail', args=[self.kwargs.get('pk')])
 
-
     def get_form_class(self):
         user = self.request.user
 
@@ -54,9 +56,11 @@ class ProductUpdateView(LoginRequiredMixin, UpdateView):
             return ProductsModeratorForm
         raise PermissionDenied
 
+
 class ProductDeleteView(LoginRequiredMixin, DeleteView):
     model = Product
     success_url = reverse_lazy('catalog:products_list')
+
 
 class ContactView(TemplateView):
     template_name = 'catalog/contacts.html'
@@ -65,5 +69,3 @@ class ContactView(TemplateView):
         context = super().get_context_data(**kwargs)
         context['additional_data'] = 'Это дополнительная информация'
         return context
-
-
