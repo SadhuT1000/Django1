@@ -9,7 +9,7 @@ from phonenumber_field.modelfields import PhoneNumberField
 
 class User(AbstractUser):
 
-    username = None
+    username = models.CharField(max_length=50, blank=True, null=True)
     email = models.EmailField(unique=True, verbose_name='email')
 
     avatar = models.ImageField(upload_to='images/',
@@ -28,7 +28,7 @@ class User(AbstractUser):
     token = models.CharField(max_length=150, verbose_name='Token', blank=True, null=True)
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = []
+    REQUIRED_FIELDS = ['username', ]
 
     class Meta:
         verbose_name = 'Пользователь'

@@ -2,8 +2,10 @@ from django.views.generic import ListView, DetailView, TemplateView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from catalog.models import Product, Category
 from django.urls import reverse_lazy, reverse
-from .froms import ProductsForm
+from .froms import ProductsForm, ProductsModeratorForm
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.exceptions import PermissionDenied
+from django.http import HttpResponseForbidden
 
 class ProductListView(ListView):
     model = Product
@@ -14,15 +16,17 @@ class ProductCreateView(LoginRequiredMixin, CreateView):
     template_name = 'catalog/product_form.html'
     success_url = reverse_lazy('catalog:products_list')
 
-class ProductDetailView(DetailView):
+class ProductDetailView(LoginRequiredMixin, DetailView):
     model = Product
 
     def get_object(self, queryset=None):
 
         self.object = super().get_object(queryset)
-        self.object.views_counter += 1
-        self.object.save()
-        return self.object
+        if self.request.user == self.object.owner:
+            self.object.views_counter += 1
+            self.object.save()
+            return self.object
+        raise PermissionDenied
 
 class ProductUpdateView(LoginRequiredMixin, UpdateView):
     model = Product
@@ -32,6 +36,16 @@ class ProductUpdateView(LoginRequiredMixin, UpdateView):
 
     def get_success_url(self):
         return reverse('catalog:products_detail', args=[self.kwargs.get('pk')])
+
+
+    def get_form_class(self):
+        user = self.request.user
+
+        if user == self.object.owner:
+            return ProductsForm
+        if user.has_perm('product.can_unpublish_product'):
+            return ProductsModeratorForm
+        raise PermissionDenied
 
 class ProductDeleteView(LoginRequiredMixin, DeleteView):
     model = Product

@@ -58,5 +58,8 @@ class ProductsForm(StyleFormMixin, ModelForm):
 
 
 
-
+class ProductsModeratorForm(StyleFormMixin, ModelForm):
+    class Meta:
+        model = Product
+        fields = ("status_publication", )
 

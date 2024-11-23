@@ -1,5 +1,6 @@
 # Create your models here.
 from django.db import models
+from users.models import User
 
 
 class Category(models.Model):
@@ -25,6 +26,8 @@ class Product(models.Model):
     created_at = models.DateField(auto_now_add=True)
     updated_at = models.DateField(auto_now_add=True)
     views_counter = models.PositiveIntegerField(verbose_name='Счетчик просмотров', help_text='Укажите количество просмотров', default=0)
+    status_publication = models.BooleanField(default=False)
+    owner = models.ForeignKey(User, verbose_name="Владелец", blank=True, null=True, on_delete=models.SET_NULL)
 
     def __str__(self):
         return f'{self.names}'
@@ -33,3 +36,6 @@ class Product(models.Model):
         verbose_name = 'Имя продукта'
         verbose_name_plural = 'Имена продуктов'
         ordering = ['names']
+        permissions = [
+            ('can_unpublish_product', 'can unpublish product'),
+        ]
