@@ -61,6 +61,20 @@ class ProductDeleteView(LoginRequiredMixin, DeleteView):
     model = Product
     success_url = reverse_lazy('catalog:products_list')
 
+    def get_object(self, queryset=None):
+
+        product = super().get_object(queryset)
+        user = self.request.user
+
+        if product.owner != user and not user.has_perm('catalog.can_delete_product'):
+            raise PermissionDenied("Вы не можете удалять этот продукт.")
+
+        return product
+
+
+
+
+
 
 class ContactView(TemplateView):
     template_name = 'catalog/contacts.html'
