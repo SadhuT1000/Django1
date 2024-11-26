@@ -81,7 +81,7 @@ class ProductDeleteView(LoginRequiredMixin, DeleteView):
 class ProductsByCategoryView(ListView):
     model = Category
     def get_queryset(self):
-        category_id = self.kwargs.get('category_id')
+        category_id = self.kwargs.get('pk')
         return get_products_by_category(category_id=category_id)
 
 
