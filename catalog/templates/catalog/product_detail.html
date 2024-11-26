@@ -1,0 +1,18 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}Список продуктов{% endblock %}
+{% load my_tags %}
+
+{% block content %}
+
+<h2>Подробнее по продукту</h2>
+<p>Название: {{ object.names |upper }} </p>
+<p>Описание: {{ object.description|truncatechars:100 }}</p>
+<p>Категория: {{ object.category }}</p>
+<p>Цена: {{ object.price }}</p>
+<p>Фото: <img src="{{ product.image | media_filter }}" width=" 400" height=" 270">
+</p>
+<a href="{% url 'catalog:product_update' object.pk %}" class="btn btn-secondary">Редактировать</a>
+<a href="{% url 'catalog:product_delete' object.pk %}" class="btn btn-danger ">Удалить</a>
+<a href="{% url 'catalog:products_list' %}" class="btn btn-primary">Вернуться к списку продуктов</a>
+{% endblock %}
