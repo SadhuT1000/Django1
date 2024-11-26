@@ -1,15 +1,22 @@
 from django.views.generic import ListView, DetailView, TemplateView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from catalog.models import Product, Category
+from django.shortcuts import render, get_object_or_404
 from django.urls import reverse_lazy, reverse
 from .froms import ProductsForm, ProductsModeratorForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import PermissionDenied
 from django.http import HttpResponseForbidden
+from django.views import View
+
+from catalog.services import get_products_from_cache, get_products_by_category
 
 
 class ProductListView(ListView):
     model = Product
+
+    def get_queryset(self):
+        return get_products_from_cache()
 
 
 class ProductCreateView(LoginRequiredMixin, CreateView):
@@ -71,6 +78,11 @@ class ProductDeleteView(LoginRequiredMixin, DeleteView):
 
         return product
 
+class ProductsByCategoryView(ListView):
+    model = Category
+    def get_queryset(self):
+        category_id = self.kwargs.get('category_id')
+        return get_products_by_category(category_id=category_id)
 
 
 
